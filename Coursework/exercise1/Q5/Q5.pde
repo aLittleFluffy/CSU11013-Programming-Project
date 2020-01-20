@@ -14,6 +14,7 @@ void setup(){
   dirx = 1;
   diry = 1;
   //randomMultiplier = random(0,height*width);
+  delay(7500);
 }
 
 void draw(){
@@ -22,7 +23,6 @@ void draw(){
   fill(invertColourMap(posx, posy), colourMapX(posx), colourMapY(posy));
   posx+=dirx*1;
   posy+=diry*1.25;
-  print("\n("+posx + "," + posy +") "+ null +"\n");
   rect(posx, posy, 100,100);
   if(posy>=(height-100)||posy<=0) diry=diry*-1;
   if(posx>=(width-100)||posx<=0) dirx=dirx*-1;
