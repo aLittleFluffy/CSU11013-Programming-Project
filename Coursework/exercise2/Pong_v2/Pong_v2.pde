@@ -1,6 +1,6 @@
+Ball  gameBall;
 Player player;
 Player computer;
-Ball  gameBall;
 
 boolean cont;
 
@@ -16,13 +16,14 @@ void setup(){
     cont = true;
     player.score = 0;
     computer.score = 0;
-
+    PFont myFont = loadFont("SansSerif-20.vlw");
+    textFont(myFont);
 }
 
 void draw() {
     if(cont){
         background(0);
-        player.move(mouseY);
+        player.move(mouseY-(PADDLEHEIGHT/2));
         computer.computerMove();
         
         player.draw();
@@ -38,6 +39,9 @@ void draw() {
         player.draw();
         computer.draw();
         gameBall.draw();
+        text("Current Speed:\n"+sqrt(pow(gameBall.dx,2)+pow(gameBall.dy,2)),PADDLEWIDTH+MARGIN+10,50);
+        text(player.score, SCREENX/2-100, 50);
+        text(computer.score, SCREENX/2+100, 50);
     } else {
         reset(0);
     }
@@ -48,16 +52,27 @@ void reset(int scorer){
     cont = false;
     gameBall.gameReset();
     // Scoring logic
-    if(scorer == -1){
+    if(computer.score>=3){
+        text("Game Over\nYou Lose", SCREENX/2, SCREENY/2);
+        fullReset();
+    } else if(player.score>=3){
+      text("Game Over\nYou Win", SCREENX/2, SCREENY/2);
+      fullReset();
+    } else {
+      if(scorer == -1){
         player.score();
         computer.dy*=SPEED_MUL;
-    } else if(scorer == 1){
+      } else if(scorer == 1){
         computer.score();
-        player.dy*=SPEED_MUL;
+        //gameBall.ballSpeed*=SPEED_MUL;
+      }
     }
-    //println("playerdy: ",player.dy, "compdy", computer.dy);
+    
 }
-
+void fullReset(){
+  computer.score = 0;
+  player.score = 0;
+}
 void mousePressed(){
     cont = true;
 }

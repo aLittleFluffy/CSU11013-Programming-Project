@@ -5,7 +5,7 @@ class Player {
     color paddlecolor = color(255);
     boolean player;
 
-    float dy = 1.1;
+    float dy = 2.0;
     Player(int screen_x){
         xpos=screen_x;
         ypos=SCREENY/2;

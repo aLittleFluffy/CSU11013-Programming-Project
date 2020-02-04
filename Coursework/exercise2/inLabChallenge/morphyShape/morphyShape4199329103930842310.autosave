@@ -1,0 +1,31 @@
+int tileX, tileY;
+int tileDistance = 30;
+float tileNumber = 0;
+int count;
+void setup() {
+  size(640, 360);
+  noFill();
+  stroke(255);
+  strokeWeight(2);
+  count=0;
+}
+ 
+void draw() {
+  background(0);
+  morph_shape(lerp(0,count,0.2));
+  count++
+}
+ 
+void morph_shape(float amt) {
+  stroke(lerpColor(color(255,0,0),color(0,0,255),amt));
+  //rect(tileX, tileY,20+10*amt,20+10*amt,20*amt);
+  pushMatrix();
+  translate(tileX,tileY);
+  beginShape();
+    vertex(0,20*amt);
+    vertex(20-10*amt,0);
+    vertex(20,20);
+    vertex(0,20);
+  endShape(CLOSE);
+  popMatrix();
+}

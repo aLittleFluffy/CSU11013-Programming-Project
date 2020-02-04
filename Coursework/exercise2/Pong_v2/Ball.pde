@@ -15,7 +15,7 @@ class Ball{
         y = random(SCREENY/4, SCREENY/4);
         dx = random(1,2);
         dy = random(1,2);
-        radius = 15;
+        radius = 10;
         ballAngle = MAX_ANGLE;
         ballSpeed = 1.1;
     }
@@ -40,15 +40,13 @@ class Ball{
         }
 
         // Player Collision
-        if(x+radius >= tp.xpos && x-radius<=tp.xpos+PADDLEWIDTH && y>=tp.ypos && y<=tp.ypos+PADDLEHEIGHT){
-            intersectAtY = map(x-tp.xpos, -PADDLEHEIGHT/2, PADDLEHEIGHT/2,-1,1);
-            ballAngle = MAX_ANGLE*intersectAtY;
+        if(x+radius >= tp.xpos && x<=tp.xpos+PADDLEWIDTH+MARGIN && y>tp.ypos && y<tp.ypos+PADDLEHEIGHT){
             dx=-dx;
-            dy=ballSpeed*sin(ballAngle);
-            println(dy);
-            dy=constrain(dy, -50, 50);
-            println("Speed: ", ballSpeed, " Ball Angle: ", ballAngle, " dy: ", dy, " Intersetct: ", intersectAtY);
-
+            dy*=SPEED_MUL; dx*=SPEED_MUL;
+            println(ballAngle);
+            dy=constrain(dy, -5, 5);dx=constrain(dx,-7,7);
+            println("Speed: ", ballSpeed, " Ball Angle: ", ballAngle, " dy: ", dy, "dx:",dx," Intersect: ", intersectAtY);
+            println("Calculated Speed: ", sqrt(pow(dy,2)+pow(dx,2)));
         }
     }
     
@@ -58,13 +56,13 @@ class Ball{
         } else if(x+radius<=0){
             return int(1);
         } else return int(0);
+        
     }
 
     void gameReset(){
         x = random(SCREENX/4, SCREENX/2);
         y = random(SCREENY/4, SCREENY/2);
-        dx = random(1,2);
-        dy = random(1,2);
-        ballSpeed++;
+        
+        ballSpeed+=1;
     }
 }
