@@ -32,24 +32,6 @@ class Alien {
       }
     }
   }
-  void moveSpecial(){
-    if(exploded<1){
-      if(x<1 || (x+sprite.width >= width)){
-        if(count<heightDiff){
-          y+=dy;
-          count++;
-          dy+=0.01;
-        } else {
-          dir*=-1;
-          x+=dir*dx;
-          count = 0;
-          dx++;
-        };
-      } else {
-        x += dir*dx ;
-      }
-    }
-  }
   void draw(){
     if(exploded>=1 && exploded<25){
       image(explode, x, y);
@@ -58,19 +40,6 @@ class Alien {
       image(sprite, x, y);
     }
   }
-  void drawSpecial(){
-    tint(0,153,204);
-    /*
-    if(exploded>=1 && exploded<25){
-      image(explode, x, y);
-      exploded++;
-    } else if(exploded==0){        
-      image(alienImage, x, y);
-    }*/
-    draw();
-    noTint();
-  }
-  
   void explode(){
     if(exploded==0){
       int toExplode = int(random(0,5));
