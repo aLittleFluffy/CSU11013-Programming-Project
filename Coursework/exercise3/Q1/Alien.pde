@@ -9,12 +9,13 @@ class Alien {
   float dy; float dx;
   float angle;
   PImage sprite;
+  PImage A,B,C,D;
   Alien(int xpos, int ypos, PImage image){
     x = xpos; y = ypos;
     exploded = 0;
     count = 0;
     sprite = image;
-    heightDiff = sprite.height;
+    heightDiff = sprite.height; //<>//
     special = false;
   }
   Alien(int xpos, int ypos, PImage image, boolean special){
@@ -67,14 +68,37 @@ class Alien {
     }
   }
   void draw(){
-    if(exploded>=1 && exploded<25){
+    if(exploded>=1 && explode<25){
       image(explode, x, y, 30, 25);
       exploded++;
     } else if(exploded==0){        
       image(sprite, x, y, 30, 25);
     }
   }
-  void explode(){
+  void explode(){/*
+    if(exploded<1){
+      // Load Pixels
+      for(int x = 0; x<sprite.width;x++){
+        for(int y=0; y<sprite.height; y++){
+          //int loc = x + y*width;
+          if(x<width/2){
+            if(y<width/2){
+              A.set(x,y,sprite.get(x,y));
+            } else {
+              C.set(x, y-width/2,sprite.get(x,y));
+            }
+          } else {
+            if(y<width/2){
+              B.set(x,y,sprite.get(x,y));
+            } else {
+              D.set(x,y-width/2,sprite.get(x,y));
+            }
+          }
+        }
+      }
+      exploded = 1;
+    }*/
+    
     if(exploded==0){
       int toExplode = int(random(0,5));
       if(toExplode<1){
