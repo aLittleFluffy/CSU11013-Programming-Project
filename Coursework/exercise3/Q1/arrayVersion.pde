@@ -31,10 +31,6 @@ void drawArray(Alien alienArr[]){
 }
 void moveArray(Alien alienArr[]){
   for (int i = 0; i < alienArr.length; ++i) {
-    if(alienArr[i].special){
-      alienArr[i].moveSpecial();
-    } else {
       alienArr[i].move();
-    }
   }
 }
