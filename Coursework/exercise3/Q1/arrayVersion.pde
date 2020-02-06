@@ -18,11 +18,7 @@ void draw(){
 }
 void initArray(Alien alienArr[]){
   for(int i=0; i<alienArr.length; i++){
-    if(i%3==0){
-      alienArr[i] = new Alien(int(random(0,SCREENX-spacer.width)), int(random(0,SCREENY-spacer.height)), true);
-    } else {
-      alienArr[i] = new Alien(int(random(0,SCREENX-spacer.width)), int(random(0,SCREENY-spacer.height)), false);
-    }
+      alienArr[i] = new Alien(0+i*spacer.width,0, spacer);
   }
 }
 void drawArray(Alien alienArr[]){

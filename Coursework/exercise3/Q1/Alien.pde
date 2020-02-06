@@ -1,27 +1,24 @@
 class Alien {
   float x; float y;
   int dir = 1;
-  PImage alienImage = loadImage("spacer.gif");
   PImage explode = loadImage("exploding.gif");
   int count;
-  int heightDiff = alienImage.height;
+  int heightDiff;
   int exploded;
   boolean special;
   float dy; float dx;
   float angle;
-  Alien(int xpos, int ypos, boolean isSpecial){
+  PImage sprite;
+  Alien(int xpos, int ypos, PImage image){
     x = xpos; y = ypos;
     exploded = 0;
     count = 0;
-    special = isSpecial;
-    if(isSpecial){
-      dy = 1;
-      dx = 1;
-    }
+    sprite = image;
+    heightDiff = sprite.height;
   }
   void move(){
     if(exploded<1){
-      if(x<1 || (x+alienImage.width >= width)){
+      if(x<0 || (x+sprite.width >= width)){
         if(count<heightDiff){
           y++;
           count++;
@@ -37,7 +34,7 @@ class Alien {
   }
   void moveSpecial(){
     if(exploded<1){
-      if(x<1 || (x+alienImage.width >= width)){
+      if(x<1 || (x+sprite.width >= width)){
         if(count<heightDiff){
           y+=dy;
           count++;
@@ -58,7 +55,7 @@ class Alien {
       image(explode, x, y);
       exploded++;
     } else if(exploded==0){        
-      image(alienImage, x, y);
+      image(sprite, x, y);
     }
   }
   void drawSpecial(){
@@ -76,7 +73,7 @@ class Alien {
   
   void explode(){
     if(exploded==0){
-      int toExplode = int(random(0,2));
+      int toExplode = int(random(0,5));
       if(toExplode<1){
         exploded = 1;
       } else {
