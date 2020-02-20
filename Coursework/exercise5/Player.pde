@@ -1,9 +1,11 @@
 class Player{
     float xpos;
     float ypos;
+    boolean hit;
     Player(float screen_y){
         xpos = SCREENX/2;
         ypos = screen_y;
+        hit = false;
     }
     void move(float x){
         if(x>SCREENX-PADDLEWIDTH) xpos = SCREENX-PADDLEWIDTH;
