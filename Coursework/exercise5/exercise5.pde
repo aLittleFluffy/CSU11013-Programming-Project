@@ -51,6 +51,7 @@ void draw(){
   }
   else{
     // Game Over Text
+    background(255);
     fill(0);
     textSize(40);
     player.move(mouseX-(PADDLEWIDTH/2));
