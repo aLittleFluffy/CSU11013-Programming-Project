@@ -67,12 +67,12 @@ void setup(){
   Widget widget1, widget2;
   int xpos = (width/2)-(100/2);
   widget1 = new Widget(xpos, 100, 100, 40, "Button 1", color(255,0,0), stdFont, EVENT_BUTTON1);
-  widget2 = new Widget(xpos, 200, 100, 40, "Forward", color(0,255,0), stdFont, EVENT_BUTTON2);
+  widget2 = new Widget(xpos, 200, 100, 40, "Forward", color(0,255,0), stdFont, EVENT_BUTTON3);
   color colour = color(0);
   screen1 = new Screen( colour);
   screen1.addWidget(widget1); screen1.addWidget(widget2);
 
-  widget1 = new Widget(xpos, 100, 100, 40, "Button 2", color(0,0,255), stdFont, EVENT_BUTTON3);
+  widget1 = new Widget(xpos, 100, 100, 40, "Button 2", color(0,0,255), stdFont, EVENT_BUTTON2);
   widget2 = new Widget(xpos, 200, 100, 40, "Backward", color(173,216,230), stdFont, EVENT_BUTTON4);
   colour = color(100);
   screen2 = new Screen(colour);
@@ -86,28 +86,30 @@ void draw(){
   screens.get(selectedScreen).draw();
 }
 
-void mousePressed(){
-  
+void mousePressed(){ 
   int event = screens.get(selectedScreen).getEvent(mouseX, mouseY);
+  println(event);
   switch(event) {
     case EVENT_BUTTON1:
-      println("Button 1 pressed");
+      // println("Button 1 pressed");
       // screens.get(0).selected = false;
       // screens.get(1).selected = true;
       selectedScreen = 1;
       break;
-    case EVENT_BUTTON2:
-      println("Forward Pressed");
+    case(EVENT_BUTTON2):
+      selectedScreen = 0;
       break;
     case EVENT_BUTTON3:
-      println("Button 2 Pressed");
+      println("Forward Pressed");
+      // println("Button 2 Pressed");
       // screens.get(1).selected = false;
       // screens.get(0).selected = true;
       selectedScreen = 0;
       break;
-    case EVENT_BUTTON4:
+    case(EVENT_BUTTON4):
       println("Backward Pressed");
       //selectedScreen.widgets.get(1).pressed();
+      selectedScreen = 1;
       break;
   }
   

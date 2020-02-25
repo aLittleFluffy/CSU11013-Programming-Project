@@ -15,11 +15,12 @@ class Screen{
     }
 
     int getEvent(int mousex, int mousey){
-        int event = 0;
+        int event = 5;
         for(Widget widget : widgets){
             event = widget.getEvent(mousex, mousey);
-            println("clicked: ",event);
-            return event;
+            if(event!=EVENT_NULL){
+                return event;
+            }
         }
         return event;
     }
