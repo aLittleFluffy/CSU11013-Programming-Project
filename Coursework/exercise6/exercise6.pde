@@ -59,7 +59,7 @@ void mouseMoved(){
 
 // PART 2
 ArrayList<Screen> screens;
-
+int selectedScreen;
 void setup(){
   size(400,400);
   stdFont=loadFont("ArialMT-36.vlw"); textFont(stdFont);
@@ -69,65 +69,60 @@ void setup(){
   widget1 = new Widget(xpos, 100, 100, 40, "Button 1", color(255,0,0), stdFont, EVENT_BUTTON1);
   widget2 = new Widget(xpos, 200, 100, 40, "Forward", color(0,255,0), stdFont, EVENT_BUTTON2);
   color colour = color(0);
-  screen1 = new Screen( colour, widget1, widget2, true);
+  screen1 = new Screen( colour);
+  screen1.addWidget(widget1); screen1.addWidget(widget2);
 
   widget1 = new Widget(xpos, 100, 100, 40, "Button 2", color(0,0,255), stdFont, EVENT_BUTTON3);
   widget2 = new Widget(xpos, 200, 100, 40, "Backward", color(173,216,230), stdFont, EVENT_BUTTON4);
   colour = color(100);
-  screen2 = new Screen(colour, widget1, widget2, false);
+  screen2 = new Screen(colour);
+  screen2.addWidget(widget1); screen2.addWidget(widget2);
+
   screens = new ArrayList<Screen>();
   screens.add(screen1); screens.add(screen2);
 }
 void draw(){
-  for(Screen screen : screens){
-    if(screen.selected){
-      screen.draw();
-    }
-  }
+  background(255);
+  screens.get(selectedScreen).draw();
 }
 
 void mousePressed(){
-  Screen selectedScreen = null;
-  for(Screen screen : screens){
-    if(screen.selected){
-      selectedScreen = screen;
-    }
+  
+  int event = screens.get(selectedScreen).getEvent(mouseX, mouseY);
+  switch(event) {
+    case EVENT_BUTTON1:
+      println("Button 1 pressed");
+      // screens.get(0).selected = false;
+      // screens.get(1).selected = true;
+      selectedScreen = 1;
+      break;
+    case EVENT_BUTTON2:
+      println("Forward Pressed");
+      break;
+    case EVENT_BUTTON3:
+      println("Button 2 Pressed");
+      // screens.get(1).selected = false;
+      // screens.get(0).selected = true;
+      selectedScreen = 0;
+      break;
+    case EVENT_BUTTON4:
+      println("Backward Pressed");
+      //selectedScreen.widgets.get(1).pressed();
+      break;
   }
-  int event = selectedScreen.getEvent(mouseX, mouseY);
-      switch(event) {
-        case EVENT_BUTTON1:
-          println("Button 1 pressed");
-          screens.get(0).selected = false;
-          screens.get(1).selected = true;
-          break;
-        case EVENT_BUTTON2:
-          println("Forward Pressed");
-          break;
-        case EVENT_BUTTON3:
-          println("Button 2 Pressed");
-          screens.get(1).selected = false;
-          screens.get(0).selected = true;
-          break;
-        case EVENT_BUTTON4:
-          println("Backward Pressed");
-          //selectedScreen.widgets.get(1).pressed();
-          break;
-      }
   
 }
 
 void mouseMoved(){
   int event;
-  for(Screen screen : screens){
-    if(screen.selected){
-      for(Widget widget : screen.widgets){
-        event = widget.getEvent(mouseX, mouseY);
-        if(event!= EVENT_NULL){
-          widget.strokeColour = color(255);
-        } else {
-          widget.strokeColour = color(0);
-        }
-      }
+  Screen screen = screens.get(selectedScreen); 
+  
+  for(Widget widget : screen.widgets){
+    event = widget.getEvent(mouseX, mouseY);
+    if(event!= EVENT_NULL){
+      widget.strokeColour = color(255);
+    } else {
+      widget.strokeColour = color(0);
     }
   }
 }
