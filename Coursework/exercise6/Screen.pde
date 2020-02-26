@@ -15,7 +15,7 @@ class Screen{
     }
 
     int getEvent(int mousex, int mousey){
-        int event = 5;
+        int event = 0;
         for(Widget widget : widgets){
             event = widget.getEvent(mousex, mousey);
             if(event!=EVENT_NULL){

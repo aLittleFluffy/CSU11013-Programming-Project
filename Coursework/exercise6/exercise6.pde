@@ -88,7 +88,7 @@ void draw(){
 
 void mousePressed(){ 
   int event = screens.get(selectedScreen).getEvent(mouseX, mouseY);
-  println(event);
+  //println(event);
   switch(event) {
     case EVENT_BUTTON1:
       // println("Button 1 pressed");
