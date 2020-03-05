@@ -1,6 +1,6 @@
 
-
-/* PART 1/2
+/* 
+//PART 1/2
 void setup(){
   Widget widget1, widget2,widget3;
   size(400, 400);
@@ -51,11 +51,12 @@ void mouseMoved(){
       widget.strokeColour = color(0);
     }
   }
-}
-*/
+} */
+
 //  Widget(int x,int y, int width, int height, String label, color widgetColor, PFont widgetFont, int event){
 //     Screen(color backgroundColor, Widget widget1, Widget widget2, int screenNum){
 //   widget1=new Widget((width/2)-(100/2), 100, 100, 40,"red", color(100), stdFont,EVENT_BUTTON1);
+
 
 // PART 2
 ArrayList<Screen> screens;
